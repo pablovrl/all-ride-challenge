@@ -69,17 +69,6 @@ export class AppComponent implements OnInit {
     }
 
     this.markers.unshift(newMarker);
-    this.markers.unshift(newMarker);
-    this.markers.unshift(newMarker);
-    this.markers.unshift(newMarker);
-    this.markers.unshift(newMarker);
-    this.markers.unshift(newMarker);
-    this.markers.unshift(newMarker);
-    this.markers.unshift(newMarker);
-    this.markers.unshift(newMarker);
-    this.markers.unshift(newMarker);
-    this.markers.unshift(newMarker);
-    this.markers.unshift(newMarker);
     this.locationService.emitNewLocation(newMarker);
 
     this.clearAddress();
