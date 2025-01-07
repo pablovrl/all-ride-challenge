@@ -9,7 +9,7 @@ import { Location } from './models/location.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  markers: Location[] = [];
+  locations: Location[] = [];
   address: string = '';
   results: any[] = [];
   typingTimeout!: any;
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
 
   listenToNewLocations() {
     this.locationService.onEmittedLocation().subscribe((location: { lat: number, lng: number, address: string }) => {
-      this.markers.push(location);
+      this.locations.push(location);
     });
   }
 
@@ -62,14 +62,14 @@ export class AppComponent implements OnInit {
   }
 
   onSelectAddress(result: google.maps.GeocoderResult): void {
-    const newMarker: Location = {
+    const newLocation: Location = {
       lat: result.geometry.location.lat(),
       lng: result.geometry.location.lng(),
       address: result.formatted_address
     }
 
-    this.markers.unshift(newMarker);
-    this.locationService.emitNewLocation(newMarker);
+    this.locations.unshift(newLocation);
+    this.locationService.emitNewLocation(newLocation);
 
     this.clearAddress();
     this.clearResults();

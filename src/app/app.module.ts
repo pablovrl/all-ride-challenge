@@ -6,6 +6,7 @@ import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { FormsModule } from '@angular/forms';
 import { MapComponent } from './components/map/map.component';
+import { LocationCardComponent } from './components/location-card/location-card.component';
 
 const socketIoConfig: SocketIoConfig = {
   url: 'https://stage.allrideapp.com/tech_interview?room=pablovrl',
@@ -17,7 +18,8 @@ const socketIoConfig: SocketIoConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent
+    MapComponent,
+    LocationCardComponent
   ],
   imports: [
     BrowserModule,
