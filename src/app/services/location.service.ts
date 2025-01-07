@@ -22,7 +22,7 @@ export class LocationService {
   }
 
   onEmittedLocation() {
-    return this.socket.fromEvent<any>('newLocation');
+    return this.socket.fromEvent<Location>('newLocation');
   }
 
 }
