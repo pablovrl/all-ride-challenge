@@ -4,11 +4,16 @@
             <div class="p-5 flex justify-center items-center" style="background-color: #0C9ADA;">
                 <img src="../assets/allride_logo.svg" alt="all ride logo" />
             </div>
+
             <div class="px-4 mt-4">
                 <label class="block mb-2 text-lg font-bold text-gray-900 dark:text-white">Dirección</label>
-                <input (input)="onInputChange()" type="text" [(ngModel)]="address"
+                <input 
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    placeholder="Escribre una dirección para agregar al mapa" />
+                    (input)="onInputChange()" 
+                    type="text" 
+                    [(ngModel)]="address"
+                    placeholder="Escribre una dirección para agregar al mapa"
+                />
                 <div *ngIf="address && !results && !loadingGeocoder"
                     class="mt-2 text-sm text-gray-500 dark:text-gray-400">
                     No se encontraron resultados
@@ -17,19 +22,23 @@
                     Buscando resultados...
                 </div>
             </div>
+
             <div class="mt-3 px-4">
                 <div *ngFor="let result of results" class="mb-2">
                     <app-button (click)="onSelectAddress(result)" [label]="result.formatted_address"></app-button>
                 </div>
             </div>
+
             <div *ngIf="locations.length" class="hidden lg:block overflow-auto px-4">
                 <h2 class="text-lg">Ubicaciones conocidas</h2>
                 <div *ngFor="let location of locations" class="mt-3">
                     <app-location-card [location]="location" (onGoToLocation)="goToLocation($event)"></app-location-card>
                 </div>
             </div>
+
         </div>
     </div>
+
     <div style="box-shadow: -7px 2px 11px 0px rgba(0,0,0,0.10);" class="h-full lg:col-span-8">
         <app-map [locations]="locations" [center]="center" [zoom]="zoom"></app-map>
     </div>
