@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  googleMapsApiKey: ''
+  googleMapsApiKey: '' // enter your google map api key here
 };
 
 /*
