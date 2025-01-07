@@ -7,7 +7,7 @@
             <div class="px-4 mt-4">
                 <label class="block mb-2 text-lg font-bold text-gray-900 dark:text-white">Dirección</label>
                 <input (input)="onInputChange()" type="text" [(ngModel)]="address"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder="Escribre una dirección para agregar al mapa" />
                 <div *ngIf="address && !results && !loadingGeocoder"
                     class="mt-2 text-sm text-gray-500 dark:text-gray-400">
@@ -18,12 +18,8 @@
                 </div>
             </div>
             <div class="mt-3 px-4">
-                <div *ngFor="let result of results">
-                    <button type="button"
-                        class=" text-white focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 hover:scale-105 transform duration-300 ease-in-out"
-                        style="background-color: #0C9ADA;" (click)="onSelectAddress(result)">
-                        {{result.formatted_address}}
-                    </button>
+                <div *ngFor="let result of results" class="mb-2">
+                    <app-button (click)="onSelectAddress(result)" [label]="result.formatted_address"></app-button>
                 </div>
             </div>
             <div *ngIf="locations.length" class="hidden lg:block overflow-auto px-4">
