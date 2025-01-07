@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    <div style="box-shadow: -7px 2px 11px 0px rgba(0,0,0,0.10);" class="h-full lg:col-span-8">
+    <div *ngIf="apiKeyLoaded" style="box-shadow: -7px 2px 11px 0px rgba(0,0,0,0.10);" class="h-full lg:col-span-8">
         <app-map [locations]="locations" [center]="center" [zoom]="zoom"></app-map>
     </div>
 </div>
