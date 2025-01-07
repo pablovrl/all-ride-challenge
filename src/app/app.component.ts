@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
 
   listenToNewLocations() {
     this.locationService.onEmittedLocation().subscribe((location: { lat: number, lng: number, address: string }) => {
-      this.locations.push(location);
+      this.locations.unshift(location);
     });
   }
 
