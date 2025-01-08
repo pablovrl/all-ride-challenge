@@ -26,17 +26,21 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.loadGoogleMapsScript()
-    .then(() => {
-      this.listenToNewLocations();
-      this.apiKeyLoaded = true;
-    })
-    .catch((error) => console.error('Error loading Google Maps script:', error));
+      .then(() => {
+        this.listenToNewLocations();
+        this.apiKeyLoaded = true;
+      })
+      .catch((error) => console.error('Error loading Google Maps script:', error));
   }
 
   listenToNewLocations() {
     this.locationService.onEmittedLocation().subscribe((location) => {
-      this.locations.unshift(location);
+      this.addNewLocation(location);
     });
+  }
+
+  addNewLocation(location: Location) {
+    this.locations = [location, ...this.locations];
   }
 
   onInputChange(): void {
@@ -51,12 +55,12 @@ export class AppComponent implements OnInit {
 
   searchAddress(): void {
     if (this.address.trim()) {
-      this.geocoder.geocode({address: this.address}).subscribe(({ results }) => {
+      this.geocoder.geocode({ address: this.address }).subscribe(({ results }) => {
         this.results = results;
         this.loadingGeocoder = false;
       });
     }
-    
+
     if (this.address === '') this.clearResults();
   }
 
@@ -75,7 +79,7 @@ export class AppComponent implements OnInit {
       address: result.formatted_address
     }
 
-    this.locations.unshift(newLocation);
+    this.addNewLocation(newLocation);
     this.locationService.emitNewLocation(newLocation);
 
     this.clearAddress();
@@ -95,15 +99,15 @@ export class AppComponent implements OnInit {
         existingScript.addEventListener('error', () => reject(new Error('Google Maps script failed to load.')));
         return;
       }
-  
+
       const script = document.createElement('script');
       script.src = `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapsApiKey}&libraries=places`;
       script.async = true;
       script.defer = true;
-  
+
       script.onload = () => resolve();
       script.onerror = () => reject(new Error('Google Maps script failed to load.'));
-  
+
       document.head.appendChild(script);
     });
   }
